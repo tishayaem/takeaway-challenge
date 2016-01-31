@@ -23,4 +23,17 @@ expect(subject.select_dish(:Yakitori, 2)).to eq [[:Yakitori, 2]]
   expect{subject.select_dish(:Tiramisu, 1)}.to raise_error 'Not on menu. Please pick dish from the list'
   end
 
+  it{ is_expected.to respond_to(:count_price) }
+
+  it 'calculates price for one dish' do
+    subject.select_dish(:Sarada, 1)
+    expect(subject.count_price).to eq 4.50
+  end
+
+  it 'calculates price for two dishes' do
+    subject.select_dish(:Sarada, 1)
+    subject.select_dish(:Vareniki, 2)
+    expect(subject.count_price).to eq 21.20
+  end
+
 end
