@@ -36,4 +36,15 @@ expect(subject.select_dish(:Yakitori, 2)).to eq [[:Yakitori, 2]]
     expect(subject.count_price).to eq 21.20
   end
 
+  context 'payment' do
+    it 'confirms payment if given amount equals price' do
+      subject.select_dish(:Borscht, 2)
+      expect(subject.check_payment 13.90).to eq 'Payment was succesful'
+    end
+
+    it 'raises an error if given amount not equals price' do
+      subject.select_dish(:Borscht, 2)
+      expect(subject.check_payment 0).to raise_error 'Payment was unsuccesful. Incorrect amount'
+    end
+end
 end
