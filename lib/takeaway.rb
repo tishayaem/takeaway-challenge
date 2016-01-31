@@ -8,8 +8,23 @@ class Takeaway
   :Shabu_shabu => 19.50,
   :Sarada => 4.50,
   :Edamame => 3.30}
+
+  def initialize
+ @order = []
+ @price = 0
+  end
+
 def show_menu
-MENU
+MENU.dup
+end
+
+def select_dish(dish, quantity)
+ fail 'Not on menu. Please pick dish from the list' unless on_menu? dish
+ @order << [dish, quantity]
+end
+
+def on_menu? dish
+MENU.has_key?(dish)
 end
 
 end
