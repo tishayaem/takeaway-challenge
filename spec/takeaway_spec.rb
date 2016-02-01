@@ -44,7 +44,7 @@ expect(subject.select_dish(:Yakitori, 2)).to eq [[:Yakitori, 2]]
 
     it 'raises an error if given amount not equals price' do
       subject.select_dish(:Borscht, 2)
-      expect(subject.check_payment 0).to raise_error 'Payment was unsuccesful. Incorrect amount'
+      expect{subject.check_payment 0}.to raise_error 'Payment was unsuccesful. Incorrect amount'
     end
 end
 

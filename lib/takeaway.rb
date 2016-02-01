@@ -1,4 +1,4 @@
-#require_relative 'text'
+require_relative 'text'
 class Takeaway
   MENU = {:Borscht => 6.95,
   :Yakitori => 9.50,
@@ -33,29 +33,33 @@ class Takeaway
     puts "Pick the dish"
     dish = gets.chomp
     if dish != 'finish'
-    puts "Set the quantity"
-    quantity = gets.chomp
-    select_dish dish.to_sym, quantity.to_i
-    puts "Total price: £#{count_price}"
-    make_order
-  else
-    make_payment
+      puts "Set the quantity"
+      quantity = gets.chomp
+      select_dish dish.to_sym, quantity.to_i
+      puts "Total price: £#{count_price}"
+      make_order
+    else
+      make_payment
     end
   end
 
   def count_price
+
+    price = 0
     @order.each do |dish|
-    @price += MENU[dish[0]]*dish[1]
+    price += MENU[dish[0]]*dish[1]
     end
-    @price
+    price
   end
 
   def check_payment amount
    unless correct? amount
-  raise 'Payment was unsuccesful. Incorrect amount'
+    raise 'Payment was unsuccesful. Incorrect amount'
    else
-    'Payment was succesful'
-     Text.send delivery_time
+
+      text = Text.new
+     text.send delivery_time.to_s
+  'Payment was succesful'
     end
   end
 
@@ -66,7 +70,9 @@ class Takeaway
   end
 
   def correct? amount
-    amount == count_price
+    p "AMOUNT = #{amount}"
+    p "PRICE = #{count_price}"
+    amount.to_f == count_price
    end
 
    def delivery_time
