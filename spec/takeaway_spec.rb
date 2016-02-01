@@ -47,4 +47,14 @@ expect(subject.select_dish(:Yakitori, 2)).to eq [[:Yakitori, 2]]
       expect(subject.check_payment 0).to raise_error 'Payment was unsuccesful. Incorrect amount'
     end
 end
+
+context 'delivery time' do
+
+    it{ is_expected.to respond_to(:delivery_time) }
+
+    it 'shows delivery time(Time.now + 1 hour)' do
+      allow(Time).to receive(:now) { Time.new(2015,6,21, 13,30,0, "+01:00") }
+      expect(subject.delivery_time).to eq(Time.new(2015,6,21, 14,30,0, "+01:00"))
+    end
+  end
 end

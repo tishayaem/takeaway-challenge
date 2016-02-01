@@ -1,3 +1,4 @@
+#require_relative 'text'
 class Takeaway
   MENU = {:Borscht => 6.95,
   :Yakitori => 9.50,
@@ -35,7 +36,7 @@ class Takeaway
     puts "Set the quantity"
     quantity = gets.chomp
     select_dish dish.to_sym, quantity.to_i
-    puts "Total price: £#{price}"
+    puts "Total price: £#{count_price}"
     make_order
   else
     make_payment
@@ -54,12 +55,21 @@ class Takeaway
   raise 'Payment was unsuccesful. Incorrect amount'
    else
     'Payment was succesful'
-
+     Text.send delivery_time
     end
+  end
+
+  def make_payment
+    puts 'To check amount to pay, input payment amount'
+    amount = gets.chomp
+    check_payment amount
   end
 
   def correct? amount
     amount == count_price
    end
 
+   def delivery_time
+     Time.now + 60 * 60
+   end
 end
