@@ -9,7 +9,7 @@ class Takeaway
   :Shabu_shabu => 19.50,
   :Sarada => 4.50,
   :Edamame => 3.30}
-
+attr_accessor :time
   def initialize
  @order = []
  @price = 0
@@ -58,7 +58,7 @@ class Takeaway
    else
 
       text = Text.new
-     text.send delivery_time.to_s
+     text.send
   'Payment was succesful'
     end
   end
@@ -75,7 +75,7 @@ class Takeaway
     amount.to_f == count_price
    end
 
-   def delivery_time
-     Time.now + 60 * 60
-   end
+  #  def delivery_time
+  #    @time = Time.now + 60 * 60
+  #  end
 end
