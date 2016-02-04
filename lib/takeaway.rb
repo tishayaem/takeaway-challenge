@@ -16,7 +16,9 @@ attr_accessor :time
   end
 
   def show_menu
-   MENU
+    MENU.each do |key, value|
+      puts "#{key}:#{value}"
+ end
   end
 
   def select_dish(dish, quantity)
@@ -29,6 +31,7 @@ attr_accessor :time
    end
 
    def make_order
+    show_menu
     puts "Choose dish and quantity or type 'finish' to end order"
     puts "Pick the dish"
     dish = gets.chomp
